@@ -8,7 +8,7 @@ import '../models.dart';
 /// State of the map
 class MapState {
   /// Default constructor
-  MapState({@required this.mapController, @required this.notify})
+  MapState({required this.mapController, required this.notify})
       : assert(mapController != null);
 
   /// The [MapController]
@@ -17,8 +17,8 @@ class MapState {
   /// Function to notify the changefeed
   final Function notify;
 
-  double _zoom = 1.0;
-  LatLng _center = LatLng(0.0, 0.0);
+  double? _zoom = 1.0;
+  LatLng? _center = LatLng(0.0, 0.0);
 
   /// Zoom in one level
   Future<void> zoomIn() async {

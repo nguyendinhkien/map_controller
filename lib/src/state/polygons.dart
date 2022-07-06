@@ -9,7 +9,7 @@ import '../models.dart';
 /// State of the polygons on the map
 class PolygonsState {
   /// Default contructor
-  PolygonsState({@required this.notify}) : assert(notify != null);
+  PolygonsState({required this.notify}) : assert(notify != null);
 
   /// The notify function
   final Function notify;
@@ -24,11 +24,11 @@ class PolygonsState {
 
   /// Add a polygon on the map
   Future<void> addPolygon(
-      {@required String name,
-      @required List<LatLng> points,
-      Color color,
-      double borderWidth,
-      Color borderColor}) async {
+      {required String name,
+      required List<LatLng> points,
+      required Color color,
+      required double borderWidth,
+      required Color borderColor}) async {
     _namedPolygons[name] = Polygon(
         points: points,
         color: color,
@@ -49,15 +49,15 @@ class PolygonsState {
 
   /// Export all polygons to a [GeoJsonFeature] with geometry
   /// type [GeoJsonMultiPolygon]
-  GeoJsonFeature<GeoJsonMultiPolygon> toGeoJsonFeatures() {
+  GeoJsonFeature<GeoJsonMultiPolygon>? toGeoJsonFeatures() {
     if (namedPolygons.isEmpty) {
       return null;
     }
     final multiPolygon = GeoJsonMultiPolygon(name: "map_polygons");
     for (final k in namedPolygons.keys) {
-      final mapPolygon = namedPolygons[k];
+      final mapPolygon = namedPolygons[k]!;
       final polygon = GeoJsonPolygon()..name = k;
-      final geoSerie = GeoSerie(name: polygon.name, type: GeoSerieType.polygon);
+      final geoSerie = GeoSerie(name: polygon.name!, type: GeoSerieType.polygon);
       for (final point in mapPolygon.points) {
         geoSerie.geoPoints.add(
             GeoPoint(latitude: point.latitude, longitude: point.longitude));
