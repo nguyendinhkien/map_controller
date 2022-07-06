@@ -32,6 +32,7 @@ class PolygonsState {
     _namedPolygons[name] = Polygon(
         points: points,
         color: color,
+        isFilled: true,
         borderStrokeWidth: borderWidth,
         borderColor: borderColor);
     notify("updatePolygons", _namedPolygons[name], addPolygon,
@@ -57,7 +58,8 @@ class PolygonsState {
     for (final k in namedPolygons.keys) {
       final mapPolygon = namedPolygons[k]!;
       final polygon = GeoJsonPolygon()..name = k;
-      final geoSerie = GeoSerie(name: polygon.name!, type: GeoSerieType.polygon);
+      final geoSerie =
+          GeoSerie(name: polygon.name!, type: GeoSerieType.polygon);
       for (final point in mapPolygon.points) {
         geoSerie.geoPoints.add(
             GeoPoint(latitude: point.latitude, longitude: point.longitude));
