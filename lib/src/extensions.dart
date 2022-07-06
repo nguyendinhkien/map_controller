@@ -1,5 +1,5 @@
 import 'package:geopoint/geopoint.dart';
-import 'package:latlong/latlong.dart' as lat_lng;
+// import 'package:latlong/latlong.dart' as lat_lng;
 import 'package:latlong2/latlong.dart';
 
 extension GeoSerieLatLng2 on GeoSerie {
@@ -7,7 +7,7 @@ extension GeoSerieLatLng2 on GeoSerie {
     final points = <LatLng>[];
     for (final geoPoint in geoPoints) {
       try {
-        points.add(geoPoint.point.toLatLng2());
+        points.add(LatLng(geoPoint.point.latitude, geoPoint.point.longitude));
         // ignore: avoid_catches_without_on_clauses
       } catch (_) {
         if (!ignoreErrors) {
@@ -19,8 +19,8 @@ extension GeoSerieLatLng2 on GeoSerie {
   }
 }
 
-extension PointLatLng2 on lat_lng.LatLng {
-  LatLng toLatLng2() {
-    return LatLng(this.latitude, this.longitude);
-  }
-}
+// extension PointLatLng2 on lat_lng.LatLng {
+//   LatLng toLatLng2() {
+//     return LatLng(this.latitude, this.longitude);
+//   }
+// }
